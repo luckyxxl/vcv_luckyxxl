@@ -8,6 +8,7 @@ struct LuckyxxlPlugin : Plugin {
 		slug = "luckyxxl";
 		name = "luckyxxl";
 		createModel<DistributeWidget>(this, "Distribute", "Distribute");
+		createModel<QuantizeWidget>(this, "Quantize", "Quantize");
 	}
 };
 

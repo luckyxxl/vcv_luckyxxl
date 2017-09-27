@@ -11,3 +11,7 @@ using namespace rack;
 struct DistributeWidget : ModuleWidget {
 	DistributeWidget();
 };
+
+struct QuantizeWidget : ModuleWidget {
+	QuantizeWidget();
+};
