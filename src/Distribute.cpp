@@ -94,7 +94,7 @@ DistributeWidget::DistributeWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addInput(createInput<PJ301MPort>(Vec(40, 40), module, Distribute::DIST1_IN));
+	addInput(createInput<PJ301MPort>(Vec(40.5, 40), module, Distribute::DIST1_IN));
 	addOutput(createOutput<PJ301MPort>(Vec(3, 65), module, Distribute::DIST1_OUT1));
 	addOutput(createOutput<PJ301MPort>(Vec(28, 65), module, Distribute::DIST1_OUT2));
 	addOutput(createOutput<PJ301MPort>(Vec(53, 65), module, Distribute::DIST1_OUT3));
