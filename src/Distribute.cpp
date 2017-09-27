@@ -49,43 +49,39 @@ Distribute::Distribute() {
 }
 
 void Distribute::step() {
-	if(inputs[DIST1_IN]) {
-		setf(outputs[DIST1_OUT1], *inputs[DIST1_IN]);
-		setf(outputs[DIST1_OUT2], *inputs[DIST1_IN]);
-		setf(outputs[DIST1_OUT3], *inputs[DIST1_IN]);
-		setf(outputs[DIST1_OUT4], *inputs[DIST1_IN]);
-	}
-	if(inputs[DIST2_IN]) {
-		setf(outputs[DIST2_OUT1], *inputs[DIST2_IN]);
-		setf(outputs[DIST2_OUT2], *inputs[DIST2_IN]);
-		setf(outputs[DIST2_OUT3], *inputs[DIST2_IN]);
-		setf(outputs[DIST2_OUT4], *inputs[DIST2_IN]);
-	}
-	if(inputs[DIST3_IN]) {
-		setf(outputs[DIST3_OUT1], *inputs[DIST3_IN]);
-		setf(outputs[DIST3_OUT2], *inputs[DIST3_IN]);
-		setf(outputs[DIST3_OUT3], *inputs[DIST3_IN]);
-		setf(outputs[DIST3_OUT4], *inputs[DIST3_IN]);
-	}
-	if(inputs[DIST4_IN]) {
-		setf(outputs[DIST4_OUT1], *inputs[DIST4_IN]);
-		setf(outputs[DIST4_OUT2], *inputs[DIST4_IN]);
-		setf(outputs[DIST4_OUT3], *inputs[DIST4_IN]);
-		setf(outputs[DIST4_OUT4], *inputs[DIST4_IN]);
-	}
-	if(inputs[DIST5_IN]) {
-		setf(outputs[DIST5_OUT1], *inputs[DIST5_IN]);
-		setf(outputs[DIST5_OUT2], *inputs[DIST5_IN]);
-		setf(outputs[DIST5_OUT3], *inputs[DIST5_IN]);
-		setf(outputs[DIST5_OUT4], *inputs[DIST5_IN]);
-	}
+	const float in1 = getf(inputs[DIST1_IN]);
+	const float in2 = getf(inputs[DIST2_IN]);
+	const float in3 = getf(inputs[DIST3_IN]);
+	const float in4 = getf(inputs[DIST4_IN]);
+	const float in5 = getf(inputs[DIST5_IN]);
+
+	setf(outputs[DIST1_OUT1], in1);
+	setf(outputs[DIST1_OUT2], in1);
+	setf(outputs[DIST1_OUT3], in1);
+	setf(outputs[DIST1_OUT4], in1);
+	setf(outputs[DIST2_OUT1], in2);
+	setf(outputs[DIST2_OUT2], in2);
+	setf(outputs[DIST2_OUT3], in2);
+	setf(outputs[DIST2_OUT4], in2);
+	setf(outputs[DIST3_OUT1], in3);
+	setf(outputs[DIST3_OUT2], in3);
+	setf(outputs[DIST3_OUT3], in3);
+	setf(outputs[DIST3_OUT4], in3);
+	setf(outputs[DIST4_OUT1], in4);
+	setf(outputs[DIST4_OUT2], in4);
+	setf(outputs[DIST4_OUT3], in4);
+	setf(outputs[DIST4_OUT4], in4);
+	setf(outputs[DIST5_OUT1], in5);
+	setf(outputs[DIST5_OUT2], in5);
+	setf(outputs[DIST5_OUT3], in5);
+	setf(outputs[DIST5_OUT4], in5);
 }
 
 
 DistributeWidget::DistributeWidget() {
 	Distribute *module = new Distribute();
 	setModule(module);
-	box.size = Vec(15*6, 380);
+	box.size = Vec(105, 380);
 
 	{
 		SVGPanel *panel = new SVGPanel();
@@ -94,29 +90,33 @@ DistributeWidget::DistributeWidget() {
 		addChild(panel);
 	}
 
-	addInput(createInput<PJ301MPort>(Vec(33, 30), module, Distribute::DIST1_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(0, 58), module, Distribute::DIST1_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(25, 58), module, Distribute::DIST1_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(50, 58), module, Distribute::DIST1_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(75, 58), module, Distribute::DIST1_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(33, 100), module, Distribute::DIST2_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(0, 128), module, Distribute::DIST2_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(25, 128), module, Distribute::DIST2_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(50, 128), module, Distribute::DIST2_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(75, 128), module, Distribute::DIST2_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(33, 170), module, Distribute::DIST3_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(0, 198), module, Distribute::DIST3_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(25, 198), module, Distribute::DIST3_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(50, 198), module, Distribute::DIST3_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(75, 198), module, Distribute::DIST3_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(33, 240), module, Distribute::DIST4_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(0, 268), module, Distribute::DIST4_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(25, 268), module, Distribute::DIST4_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(50, 268), module, Distribute::DIST4_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(75, 268), module, Distribute::DIST4_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(33, 310), module, Distribute::DIST5_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(0, 338), module, Distribute::DIST5_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(25, 338), module, Distribute::DIST5_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(50, 338), module, Distribute::DIST5_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(75, 338), module, Distribute::DIST5_OUT4));
+	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
+	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
+	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+
+	addInput(createInput<PJ301MPort>(Vec(40, 40), module, Distribute::DIST1_IN));
+	addOutput(createOutput<PJ301MPort>(Vec(3, 65), module, Distribute::DIST1_OUT1));
+	addOutput(createOutput<PJ301MPort>(Vec(28, 65), module, Distribute::DIST1_OUT2));
+	addOutput(createOutput<PJ301MPort>(Vec(53, 65), module, Distribute::DIST1_OUT3));
+	addOutput(createOutput<PJ301MPort>(Vec(78, 65), module, Distribute::DIST1_OUT4));
+	addInput(createInput<PJ301MPort>(Vec(40, 105), module, Distribute::DIST2_IN));
+	addOutput(createOutput<PJ301MPort>(Vec(3, 130), module, Distribute::DIST2_OUT1));
+	addOutput(createOutput<PJ301MPort>(Vec(28, 130), module, Distribute::DIST2_OUT2));
+	addOutput(createOutput<PJ301MPort>(Vec(53, 130), module, Distribute::DIST2_OUT3));
+	addOutput(createOutput<PJ301MPort>(Vec(78, 130), module, Distribute::DIST2_OUT4));
+	addInput(createInput<PJ301MPort>(Vec(40, 170), module, Distribute::DIST3_IN));
+	addOutput(createOutput<PJ301MPort>(Vec(3, 195), module, Distribute::DIST3_OUT1));
+	addOutput(createOutput<PJ301MPort>(Vec(28, 195), module, Distribute::DIST3_OUT2));
+	addOutput(createOutput<PJ301MPort>(Vec(53, 195), module, Distribute::DIST3_OUT3));
+	addOutput(createOutput<PJ301MPort>(Vec(78, 195), module, Distribute::DIST3_OUT4));
+	addInput(createInput<PJ301MPort>(Vec(40, 235), module, Distribute::DIST4_IN));
+	addOutput(createOutput<PJ301MPort>(Vec(3, 260), module, Distribute::DIST4_OUT1));
+	addOutput(createOutput<PJ301MPort>(Vec(28, 260), module, Distribute::DIST4_OUT2));
+	addOutput(createOutput<PJ301MPort>(Vec(53, 260), module, Distribute::DIST4_OUT3));
+	addOutput(createOutput<PJ301MPort>(Vec(78, 260), module, Distribute::DIST4_OUT4));
+	addInput(createInput<PJ301MPort>(Vec(40, 300), module, Distribute::DIST5_IN));
+	addOutput(createOutput<PJ301MPort>(Vec(3, 325), module, Distribute::DIST5_OUT1));
+	addOutput(createOutput<PJ301MPort>(Vec(28, 325), module, Distribute::DIST5_OUT2));
+	addOutput(createOutput<PJ301MPort>(Vec(53, 325), module, Distribute::DIST5_OUT3));
+	addOutput(createOutput<PJ301MPort>(Vec(78, 325), module, Distribute::DIST5_OUT4));
 }
