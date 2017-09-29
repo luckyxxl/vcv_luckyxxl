@@ -30,17 +30,17 @@ static void drawSegment(NVGcontext *vg, const NVGcolor &color) {
 	nvgFill(vg);
 }
 
-#define BITMAP(a, b, c, d, e, f, g) (uint8_t)(a | b << 1 | c << 2 | d << 3 | e << 4 | f << 5 | g << 6)
+#define BITMAP(a, b, c, d, e, f, g) (uint8_t)(a << 0 | b << 1 | c << 2 | d << 3 | e << 4 | f << 5 | g << 6)
 
 static const std::map<char, uint8_t> bitmaps = {
+	std::make_pair('#', BITMAP(0, 1, 1, 1, 1, 1, 0)),
+	std::make_pair('a', BITMAP(1, 1, 1, 1, 1, 1, 0)),
+	std::make_pair('b', BITMAP(0, 1, 0, 1, 1, 1, 1)),
 	std::make_pair('c', BITMAP(1, 1, 0, 0, 1, 0, 1)),
 	std::make_pair('d', BITMAP(0, 0, 1, 1, 1, 1, 1)),
 	std::make_pair('e', BITMAP(1, 1, 0, 1, 1, 0, 1)),
 	std::make_pair('f', BITMAP(1, 1, 0, 1, 1, 0, 0)),
 	std::make_pair('g', BITMAP(1, 1, 1, 1, 0, 1, 1)),
-	std::make_pair('a', BITMAP(1, 1, 1, 1, 1, 1, 0)),
-	std::make_pair('b', BITMAP(0, 1, 0, 1, 1, 1, 1)),
-	std::make_pair('#', BITMAP(0, 1, 1, 1, 1, 1, 0)),
 };
 
 #undef BITMAP
@@ -60,24 +60,28 @@ void SevenSegmentDisplay::draw(NVGcontext *vg) {
 		if(b != bitmaps.end()) bitmap = b->second;
 	}
 
-	drawSegment(vg, (bitmap & (1 << 0)) ? on_color : off_color);
+	#define BIT(x) (bitmap & 1 << x) ? on_color : off_color
+
+	drawSegment(vg, BIT(0));
 	nvgTranslate(vg, 0.f, 2.f);
-	drawSegment(vg, (bitmap & (1 << 3)) ? on_color : off_color);
+	drawSegment(vg, BIT(3));
 	nvgTranslate(vg, 0.f, 2.f);
-	drawSegment(vg, (bitmap & (1 << 6)) ? on_color : off_color);
+	drawSegment(vg, BIT(6));
 
 	nvgTranslate(vg, 0.f, -4.f);
 	nvgRotate(vg, NVG_PI/2.f);
 
-	drawSegment(vg, (bitmap & (1 << 1)) ? on_color : off_color);
+	drawSegment(vg, BIT(1));
 	nvgTranslate(vg, 0.f, -2.f);
-	drawSegment(vg, (bitmap & (1 << 2)) ? on_color : off_color);
+	drawSegment(vg, BIT(2));
 
 	nvgTranslate(vg, 2.f, 2.f);
 
-	drawSegment(vg, (bitmap & (1 << 4)) ? on_color : off_color);
+	drawSegment(vg, BIT(4));
 	nvgTranslate(vg, 0.f, -2.f);
-	drawSegment(vg, (bitmap & (1 << 5)) ? on_color : off_color);
+	drawSegment(vg, BIT(5));
+
+	#undef BIT
 
 	nvgRestore(vg);
 }
@@ -85,6 +89,8 @@ void SevenSegmentDisplay::draw(NVGcontext *vg) {
 
 struct Quantize : Module {
 	enum ParamIds {
+		DISPLAY_MODE,
+		HOLD,
 		NUM_PARAMS
 	};
 	enum InputIds {
@@ -96,12 +102,26 @@ struct Quantize : Module {
 		NUM_OUTPUTS
 	};
 
+	int display_semi;
 	std::array<char, 2> display;
 
 	Quantize();
+	void initialize();
+
 	void step();
 
-	void update_display(float o, float s);
+	void update_display();
+
+	json_t *toJson() {
+		json_t *r = json_object();
+		json_object_set_new(r, "display_semi", json_integer(display_semi));
+		return r;
+	}
+
+	void fromJson(json_t *r) {
+		json_t *d = json_object_get(r, "display_semi");
+		if(d) display_semi = json_integer_value(d);
+	}
 };
 
 
@@ -110,6 +130,11 @@ Quantize::Quantize() {
 	inputs.resize(NUM_INPUTS);
 	outputs.resize(NUM_OUTPUTS);
 
+	initialize();
+}
+
+void Quantize::initialize() {
+	display_semi = 0;
 	display.fill('\0');
 }
 
@@ -123,14 +148,12 @@ void Quantize::step() {
 
 	setf(outputs[OUT], out);
 
-	update_display(o, s);
+	if(!params[HOLD]) display_semi = (int)s;
+	update_display();
 }
 
-void Quantize::update_display(float of, float sf) {
-	//const int o = (int)of;
-	const int s = (int)sf;
-
-	static const std::array<char, 2> notes[12] = {
+void Quantize::update_display() {
+	static const std::array<char, 2> semis_sharp[12] = {
 		{'c', '\0'},
 		{'c', '#'},
 		{'d', '\0'},
@@ -145,7 +168,22 @@ void Quantize::update_display(float of, float sf) {
 		{'b', '\0'},
 	};
 
-	display = notes[s];
+	static const std::array<char, 2> semis_flat[12] = {
+		{'c', '\0'},
+		{'d', 'b'},
+		{'d', '\0'},
+		{'e', 'b'},
+		{'e', '\0'},
+		{'f', '\0'},
+		{'g', 'b'},
+		{'g', '\0'},
+		{'a', 'b'},
+		{'a', '\0'},
+		{'b', 'b'},
+		{'b', '\0'},
+	};
+
+	display = (params[DISPLAY_MODE] ? semis_sharp : semis_flat)[display_semi];
 }
 
 
@@ -170,4 +208,7 @@ QuantizeWidget::QuantizeWidget() {
 
 	addChild(new SevenSegmentDisplay(Vec(20, 50), &module->display[0]));
 	addChild(new SevenSegmentDisplay(Vec(60, 50), &module->display[1]));
+
+	addParam(createParam<CKSS>(Vec(30, 110), module, Quantize::DISPLAY_MODE, 0, 1, 1));
+	addParam(createParam<CKSS>(Vec(70, 110), module, Quantize::HOLD, 0, 1, 0));
 }
