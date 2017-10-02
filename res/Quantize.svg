@@ -9,9 +9,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg4541"
    version="1.1"
-   viewBox="0 0 27.78125 100.54168"
+   viewBox="0 0 23.8125 100.54168"
    height="380"
-   width="105"
+   width="90"
    sodipodi:docname="Quantize.svg"
    inkscape:version="0.92.1 r15371">
   <sodipodi:namedview
@@ -30,8 +30,8 @@
      units="px"
      inkscape:snap-text-baseline="false"
      inkscape:zoom="1"
-     inkscape:cx="-106.3908"
-     inkscape:cy="181.95149"
+     inkscape:cx="-464.5"
+     inkscape:cy="161.79457"
      inkscape:window-x="0"
      inkscape:window-y="17"
      inkscape:window-maximized="1"
@@ -62,18 +62,19 @@
   </metadata>
   <rect
      id="rect3743"
-     width="27.781252"
+     width="23.812502"
      height="100.54167"
      x="0"
      y="1.5804033e-06"
-     style="stroke-width:0.26458335;fill:#e6e6e6;fill-opacity:1" />
+     style="fill:#e6e6e6;fill-opacity:1;stroke-width:0.24495658" />
   <g
      id="g3826"
      style="display:inline">
     <g
        id="text3688"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222247px;line-height:125%;font-family:Courier;-inkscape-font-specification:'Courier, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       aria-label="by luckyxxl">
+       aria-label="by luckyxxl"
+       transform="translate(-3.9687974)">
       <path
          inkscape:connector-curvature="0"
          id="path3711"
@@ -172,17 +173,17 @@
     </g>
   </g>
   <rect
-     style="fill:#000000;fill-opacity:1;stroke:#969696;stroke-width:0.27206779;stroke-opacity:1"
+     style="fill:#000000;fill-opacity:1;stroke:#969696;stroke-width:0.22538891;stroke-opacity:1"
      id="rect3776"
-     width="22.217518"
-     height="15.602933"
-     x="2.7818673"
-     y="10.719368" />
+     width="18.295446"
+     height="13.003778"
+     x="2.7585278"
+     y="10.696029" />
   <g
      aria-label="In"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777791px;line-height:125%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777791px;line-height:125%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="text4586"
-     transform="translate(2.124074,-1.7503903)">
+     transform="translate(1.330324,-1.2212238)">
     <path
        d="m 3.7858159,81.830328 h 0.3479546 v 2.571764 H 3.7858159 Z"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777791px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458335px"
@@ -196,9 +197,9 @@
   </g>
   <g
      aria-label="Out"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777791px;line-height:125%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777791px;line-height:125%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="text4586-8"
-     transform="translate(1.3966436,-1.7633033)">
+     transform="translate(-1.7783564,-1.2341368)">
     <path
        d="m 17.191201,82.029276 q -0.378961,0 -0.602892,0.282498 -0.222209,0.282498 -0.222209,0.769979 0,0.485759 0.222209,0.768256 0.223931,0.282498 0.602892,0.282498 0.37896,0 0.599446,-0.282498 0.222209,-0.282497 0.222209,-0.768256 0,-0.487481 -0.222209,-0.769979 -0.220486,-0.282498 -0.599446,-0.282498 z m 0,-0.282497 q 0.54088,0 0.864719,0.363457 0.323839,0.361735 0.323839,0.971517 0,0.60806 -0.323839,0.971517 -0.323839,0.361735 -0.864719,0.361735 -0.542603,0 -0.868164,-0.361735 -0.323839,-0.361735 -0.323839,-0.971517 0,-0.609782 0.323839,-0.971517 0.325561,-0.363457 0.868164,-0.363457 z"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777791px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458335px"
@@ -216,7 +217,7 @@
        inkscape:connector-curvature="0" />
   </g>
   <g
-     transform="translate(-114.29502,1.5960344)"
+     transform="translate(-115.08877,1.5960344)"
      id="layer1"
      inkscape:label="Pins"
      style="display:none">
@@ -240,7 +241,7 @@
          d="m 298.1254,1855.7454 c 0,-2.817 -2.285,-5.103 -5.103,-5.103 -2.817,0 -5.102,2.286 -5.102,5.103 0,2.817 2.285,5.103 5.102,5.103 2.818,0 5.103,-2.286 5.103,-5.103" />
     </g>
     <g
-       transform="matrix(0.27191367,0,0,-0.27191367,55.072313,591.03132)"
+       transform="matrix(0.27191367,0,0,-0.27191367,52.691063,591.03132)"
        id="g4707">
       <path
          d="m 293.0229,1844.2559 c -6.335,0 -11.489,5.154 -11.489,11.489 0,6.335 5.154,11.49 11.489,11.49 6.335,0 11.489,-5.155 11.489,-11.49 0,-6.335 -5.154,-11.489 -11.489,-11.489"
@@ -261,9 +262,9 @@
   </g>
   <g
      id="text4566"
-     style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:3.52777791px;line-height:125%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:3.52777791px;line-height:125%;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      aria-label="H"
-     transform="translate(-1.28384,4.9762415)">
+     transform="translate(-3.6650902,1.8012413)">
     <path
        inkscape:connector-curvature="0"
        id="path4573"
@@ -272,7 +273,8 @@
   </g>
   <g
      id="g4586"
-     transform="translate(1.3229168,0.52916672)">
+     transform="translate(-0.26458335,-2.6458335)"
+     style="display:inline">
     <g
        transform="translate(0.23116046,2.8140657)"
        aria-label="♯"

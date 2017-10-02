@@ -49,7 +49,7 @@ void SevenSegmentDisplay::draw(NVGcontext *vg) {
 	nvgSave(vg);
 
 	nvgTranslate(vg, position.x, position.y);
-	nvgScale(vg, 10.f, 10.f);
+	nvgScale(vg, 8.f, 8.f);
 
 	static const NVGcolor off_color = nvgRGB(0, 30, 0);
 	static const NVGcolor on_color = nvgRGB(0, 200, 0);
@@ -190,7 +190,7 @@ void Quantize::update_display() {
 QuantizeWidget::QuantizeWidget() {
 	Quantize *module = new Quantize();
 	setModule(module);
-	box.size = Vec(105, 380);
+	box.size = Vec(90, 380);
 
 	{
 		SVGPanel *panel = new SVGPanel();
@@ -199,16 +199,16 @@ QuantizeWidget::QuantizeWidget() {
 		addChild(panel);
 	}
 
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
+	addChild(createScrew<ScrewSilver>(Vec(box.size.x-15, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addInput(createInput<PJ301MPort>(Vec(15, 320), module, Quantize::IN));
-	addOutput(createOutput<PJ301MPort>(Vec(65, 320), module, Quantize::OUT));
+	addInput(createInput<PJ301MPort>(Vec(12, 320), module, Quantize::IN));
+	addOutput(createOutput<PJ301MPort>(Vec(53, 320), module, Quantize::OUT));
 
-	addChild(new SevenSegmentDisplay(Vec(20, 50), &module->display[0]));
-	addChild(new SevenSegmentDisplay(Vec(60, 50), &module->display[1]));
+	addChild(new SevenSegmentDisplay(Vec(20, 49), &module->display[0]));
+	addChild(new SevenSegmentDisplay(Vec(52, 49), &module->display[1]));
 
-	addParam(createParam<CKSS>(Vec(30, 110), module, Quantize::DISPLAY_MODE, 0, 1, 1));
-	addParam(createParam<CKSS>(Vec(70, 110), module, Quantize::HOLD, 0, 1, 0));
+	addParam(createParam<CKSS>(Vec(24, 100), module, Quantize::DISPLAY_MODE, 0, 1, 1));
+	addParam(createParam<CKSS>(Vec(60, 100), module, Quantize::HOLD, 0, 1, 0));
 }
