@@ -15,3 +15,7 @@ struct DistributeWidget : ModuleWidget {
 struct QuantizeWidget : ModuleWidget {
 	QuantizeWidget();
 };
+
+struct TickWidget : ModuleWidget {
+	TickWidget();
+};

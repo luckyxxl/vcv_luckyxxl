@@ -9,6 +9,7 @@ struct LuckyxxlPlugin : Plugin {
 		name = "luckyxxl";
 		createModel<DistributeWidget>(this, "Distribute", "Distribute");
 		createModel<QuantizeWidget>(this, "Quantize", "Quantize");
+		createModel<TickWidget>(this, "Tick", "Tick");
 	}
 };
 
