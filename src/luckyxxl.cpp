@@ -1,19 +1,15 @@
 #include "luckyxxl.hpp"
-#include <math.h>
-#include "dsp.hpp"
 
 
-struct LuckyxxlPlugin : Plugin {
-	LuckyxxlPlugin() {
-		slug = "luckyxxl";
-		name = "luckyxxl";
-		createModel<DistributeWidget>(this, "Distribute", "Distribute");
-		createModel<QuantizeWidget>(this, "Quantize", "Quantize");
-		createModel<TickWidget>(this, "Tick", "Tick");
-	}
-};
+Plugin *plugin;
 
+void init(rack::Plugin *p) {
+	plugin = p;
+	plugin->slug = "luckyxxl";
+	plugin->name = "luckyxxl";
+	plugin->homepageUrl = "https://github.com/luckyxxl/vcv_luckyxxl";
 
-Plugin *init() {
-	return new LuckyxxlPlugin();
+	createModel<DistributeWidget>(plugin, "Distribute", "Distribute");
+	createModel<QuantizeWidget>(plugin, "Quantize", "Quantize");
+	createModel<TickWidget>(plugin, "Tick", "Tick");
 }

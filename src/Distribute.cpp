@@ -49,32 +49,32 @@ Distribute::Distribute() {
 }
 
 void Distribute::step() {
-	const float in1 = getf(inputs[DIST1_IN]);
-	const float in2 = getf(inputs[DIST2_IN]);
-	const float in3 = getf(inputs[DIST3_IN]);
-	const float in4 = getf(inputs[DIST4_IN]);
-	const float in5 = getf(inputs[DIST5_IN]);
+	const float in1 = inputs[DIST1_IN].value;
+	const float in2 = inputs[DIST2_IN].value;
+	const float in3 = inputs[DIST3_IN].value;
+	const float in4 = inputs[DIST4_IN].value;
+	const float in5 = inputs[DIST5_IN].value;
 
-	setf(outputs[DIST1_OUT1], in1);
-	setf(outputs[DIST1_OUT2], in1);
-	setf(outputs[DIST1_OUT3], in1);
-	setf(outputs[DIST1_OUT4], in1);
-	setf(outputs[DIST2_OUT1], in2);
-	setf(outputs[DIST2_OUT2], in2);
-	setf(outputs[DIST2_OUT3], in2);
-	setf(outputs[DIST2_OUT4], in2);
-	setf(outputs[DIST3_OUT1], in3);
-	setf(outputs[DIST3_OUT2], in3);
-	setf(outputs[DIST3_OUT3], in3);
-	setf(outputs[DIST3_OUT4], in3);
-	setf(outputs[DIST4_OUT1], in4);
-	setf(outputs[DIST4_OUT2], in4);
-	setf(outputs[DIST4_OUT3], in4);
-	setf(outputs[DIST4_OUT4], in4);
-	setf(outputs[DIST5_OUT1], in5);
-	setf(outputs[DIST5_OUT2], in5);
-	setf(outputs[DIST5_OUT3], in5);
-	setf(outputs[DIST5_OUT4], in5);
+	outputs[DIST1_OUT1].value = in1;
+	outputs[DIST1_OUT2].value = in1;
+	outputs[DIST1_OUT3].value = in1;
+	outputs[DIST1_OUT4].value = in1;
+	outputs[DIST2_OUT1].value = in2;
+	outputs[DIST2_OUT2].value = in2;
+	outputs[DIST2_OUT3].value = in2;
+	outputs[DIST2_OUT4].value = in2;
+	outputs[DIST3_OUT1].value = in3;
+	outputs[DIST3_OUT2].value = in3;
+	outputs[DIST3_OUT3].value = in3;
+	outputs[DIST3_OUT4].value = in3;
+	outputs[DIST4_OUT1].value = in4;
+	outputs[DIST4_OUT2].value = in4;
+	outputs[DIST4_OUT3].value = in4;
+	outputs[DIST4_OUT4].value = in4;
+	outputs[DIST5_OUT1].value = in5;
+	outputs[DIST5_OUT2].value = in5;
+	outputs[DIST5_OUT3].value = in5;
+	outputs[DIST5_OUT4].value = in5;
 }
 
 

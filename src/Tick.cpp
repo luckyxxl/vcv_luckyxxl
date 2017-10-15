@@ -32,14 +32,11 @@ struct Tick : Module {
 };
 
 
-Tick::Tick() {
-	params.resize(NUM_PARAMS);
-	inputs.resize(NUM_INPUTS);
-	outputs.resize(NUM_OUTPUTS);
+Tick::Tick() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {
 }
 
 void Tick::step() {
-	const float bpm = params[BPM];
+	const float bpm = params[BPM].value;
 
 	display[0] = (int)(bpm / 100.f) % 10 + '0';
 	display[1] = (int)(bpm / 10.f) % 10 + '0';
@@ -58,21 +55,21 @@ void Tick::step() {
 	}
 
 	if(ticked) {
-		setf(outputs[OUT_1_1], !(tick % 192u));
-		setf(outputs[OUT_1_2], !(tick % 96u));
-		setf(outputs[OUT_1_4], !(tick % 48u));
-		setf(outputs[OUT_1_8], !(tick % 24u));
-		setf(outputs[OUT_1_12], !(tick % 16u));
-		setf(outputs[OUT_1_16], !(tick % 12u));
-		setf(outputs[OUT_1_24], !(tick % 8u));
+		outputs[OUT_1_1].value = !(tick % 192u);
+		outputs[OUT_1_2].value = !(tick % 96u);
+		outputs[OUT_1_4].value = !(tick % 48u);
+		outputs[OUT_1_8].value = !(tick % 24u);
+		outputs[OUT_1_12].value = !(tick % 16u);
+		outputs[OUT_1_16].value = !(tick % 12u);
+		outputs[OUT_1_24].value = !(tick % 8u);
 	} else {
-		setf(outputs[OUT_1_1], 0.f);
-		setf(outputs[OUT_1_2], 0.f);
-		setf(outputs[OUT_1_4], 0.f);
-		setf(outputs[OUT_1_8], 0.f);
-		setf(outputs[OUT_1_12], 0.f);
-		setf(outputs[OUT_1_16], 0.f);
-		setf(outputs[OUT_1_24], 0.f);
+		outputs[OUT_1_1].value = 0.f;
+		outputs[OUT_1_2].value = 0.f;
+		outputs[OUT_1_4].value = 0.f;
+		outputs[OUT_1_8].value = 0.f;
+		outputs[OUT_1_12].value = 0.f;
+		outputs[OUT_1_16].value = 0.f;
+		outputs[OUT_1_24].value = 0.f;
 	}
 }
 

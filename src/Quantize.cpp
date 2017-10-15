@@ -21,7 +21,7 @@ struct Quantize : Module {
 	int display_semi;
 	std::array<char, 2> display;
 
-	Quantize();
+	Quantize() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) { initialize(); }
 	void initialize();
 
 	void step();
@@ -41,30 +41,22 @@ struct Quantize : Module {
 };
 
 
-Quantize::Quantize() {
-	params.resize(NUM_PARAMS);
-	inputs.resize(NUM_INPUTS);
-	outputs.resize(NUM_OUTPUTS);
-
-	initialize();
-}
-
 void Quantize::initialize() {
 	display_semi = 0;
 	display.fill('\0');
 }
 
 void Quantize::step() {
-	const float in = getf(inputs[IN]);
+	const float in = inputs[IN].value;
 
 	const float o = std::floor(in);
 	const float s = std::floor((in - o) * 12.f);
 
 	const float out = o + s / 12.f;
 
-	setf(outputs[OUT], out);
+	outputs[OUT].value = out;
 
-	if(!params[HOLD]) display_semi = (int)s;
+	if(!params[HOLD].value) display_semi = s;
 	update_display();
 }
 
@@ -99,7 +91,7 @@ void Quantize::update_display() {
 		{'b', '\0'},
 	};
 
-	display = (params[DISPLAY_MODE] ? semis_sharp : semis_flat)[display_semi];
+	display = (params[DISPLAY_MODE].value ? semis_sharp : semis_flat)[display_semi];
 }
 
 
