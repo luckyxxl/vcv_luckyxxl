@@ -44,24 +44,24 @@ void Tick::step() {
 	display[3] = (int)(bpm / .1f) % 10 + '0';
 	if(display[0] == '0') display[0] = '\0';
 
-	clock_phase += (bpm / 60.f) / gSampleRate * 48;
+	clock_phase += (bpm / 60.f) / gSampleRate * 12;
 
 	bool ticked = false;
 
 	if(clock_phase >= 1.f) {
 		ticked = true;
-		if(++tick >= 192u) tick = 0u;
+		if(++tick >= 48u) tick = 0u;
 		clock_phase -= 1.f;
 	}
 
 	if(ticked) {
-		outputs[OUT_1_1].value = !(tick % 192u);
-		outputs[OUT_1_2].value = !(tick % 96u);
-		outputs[OUT_1_4].value = !(tick % 48u);
-		outputs[OUT_1_8].value = !(tick % 24u);
-		outputs[OUT_1_12].value = !(tick % 16u);
-		outputs[OUT_1_16].value = !(tick % 12u);
-		outputs[OUT_1_24].value = !(tick % 8u);
+		outputs[OUT_1_1].value = !(tick % 48u);
+		outputs[OUT_1_2].value = !(tick % 24u);
+		outputs[OUT_1_4].value = !(tick % 12u);
+		outputs[OUT_1_8].value = !(tick % 6u);
+		outputs[OUT_1_12].value = !(tick % 4u);
+		outputs[OUT_1_16].value = !(tick % 3u);
+		outputs[OUT_1_24].value = !(tick % 2u);
 	} else {
 		outputs[OUT_1_1].value = 0.f;
 		outputs[OUT_1_2].value = 0.f;
