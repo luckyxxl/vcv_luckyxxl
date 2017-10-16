@@ -3,6 +3,7 @@
 #include "SevenSegmentDisplay.hpp"
 
 #include <map>
+#include <utility>
 
 
 SevenSegmentDisplay::SevenSegmentDisplay(Vec position, float size, char *display)
@@ -99,13 +100,13 @@ void SevenSegmentDot::draw(NVGcontext *vg) {
 
 	nvgTranslate(vg, position.x, position.y);
 	nvgScale(vg, size, size);
-	
+
 	nvgBeginPath(vg);
 	nvgCircle(vg, 0.f, 0.f, .4f);
 	nvgClosePath(vg);
-	
+
 	nvgFillColor(vg, nvgRGB(0, 200, 0));
 	nvgFill(vg);
-	
+
 	nvgRestore(vg);
 }

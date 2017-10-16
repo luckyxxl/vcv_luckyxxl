@@ -2,6 +2,8 @@
 
 #include "SevenSegmentDisplay.hpp"
 
+#include <array>
+
 
 struct Quantize : Module {
 	enum ParamIds {

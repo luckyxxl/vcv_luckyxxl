@@ -1,5 +1,7 @@
 #include "rack.hpp"
 
+#include <cmath>
+
 
 using namespace rack;
 
