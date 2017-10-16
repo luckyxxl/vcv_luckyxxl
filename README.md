@@ -2,6 +2,9 @@
 
 My own modules for [VCVRack](https://github.com/VCVRack/Rack) [v0.4.0](https://github.com/VCVRack/Rack/releases/tag/v0.4.0).
 
+Clone this repo into the `plugins` folder of Rack and name the new folder `luckyxxl`, i.e.:
+* `cd plugins && git clone https://github.com/luckyxxl/vcv_luckyxxl.git luckyxxl`
+
 ### Distribute
 
 ![Distribute_screenshot](https://raw.githubusercontent.com/luckyxxl/vcv_luckyxxl/master/screenshots/Distribute.png)
