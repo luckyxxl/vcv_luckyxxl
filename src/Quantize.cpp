@@ -105,7 +105,7 @@ QuantizeWidget::QuantizeWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/luckyxxl/res/Quantize.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Quantize.svg")));
 		addChild(panel);
 	}
 

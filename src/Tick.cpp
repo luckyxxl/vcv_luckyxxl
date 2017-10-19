@@ -27,7 +27,7 @@ struct Tick : Module {
 
 	float clock_phase = 0.f;
 	uint32_t tick = UINT32_MAX;
-	
+
 	char display[4];
 };
 
@@ -82,20 +82,20 @@ TickWidget::TickWidget() {
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load("plugins/luckyxxl/res/Tick.svg"));
+		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Tick.svg")));
 		addChild(panel);
 	}
 
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
-	
+
 	addChild(new SevenSegmentDisplay(Vec(14, 48), 5.f, &module->display[0]));
 	addChild(new SevenSegmentDisplay(Vec(31, 48), 5.f, &module->display[1]));
 	addChild(new SevenSegmentDisplay(Vec(48, 48), 5.f, &module->display[2]));
 	addChild(new SevenSegmentDisplay(Vec(65, 48), 5.f, &module->display[3]));
 	addChild(new SevenSegmentDot(Vec(61.5, 68), 5.f));
-	
+
 	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 80), module, Tick::BPM, 30.0, 240.0, 120.0));
 
 	addOutput(createOutput<PJ301MPort>(Vec(55, 145), module, Tick::OUT_1_1));
