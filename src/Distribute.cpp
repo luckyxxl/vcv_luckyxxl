@@ -37,16 +37,10 @@ struct Distribute : Module {
 		NUM_OUTPUTS
 	};
 
-	Distribute();
+	Distribute() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {}
 	void step();
 };
 
-
-Distribute::Distribute() {
-	params.resize(NUM_PARAMS);
-	inputs.resize(NUM_INPUTS);
-	outputs.resize(NUM_OUTPUTS);
-}
 
 void Distribute::step() {
 	const float in1 = inputs[DIST1_IN].value;

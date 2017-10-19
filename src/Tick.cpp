@@ -22,7 +22,7 @@ struct Tick : Module {
 		NUM_OUTPUTS
 	};
 
-	Tick();
+	Tick() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {}
 	void step();
 
 	float clock_phase = 0.f;
@@ -31,9 +31,6 @@ struct Tick : Module {
 	char display[4];
 };
 
-
-Tick::Tick() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {
-}
 
 void Tick::step() {
 	const float bpm = params[BPM].value;
