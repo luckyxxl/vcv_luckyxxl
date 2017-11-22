@@ -5,11 +5,13 @@ Plugin *plugin;
 
 void init(rack::Plugin *p) {
 	plugin = p;
-	plugin->slug = "luckyxxl";
-	plugin->name = "luckyxxl";
-	plugin->homepageUrl = "https://github.com/luckyxxl/vcv_luckyxxl";
+	p->slug = "luckyxxl";
+#ifdef VERSION
+	p->version = TOSTRING(VERSION);
+#endif
+	p->website = "https://github.com/luckyxxl/vcv_luckyxxl";
 
-	createModel<DistributeWidget>(plugin, "Distribute", "Distribute");
-	createModel<QuantizeWidget>(plugin, "Quantize", "Quantize");
-	createModel<TickWidget>(plugin, "Tick", "Tick");
+	p->addModel(createModel<DistributeWidget>("luckyxxl", "Distribute", "Distribute", MULTIPLE_TAG));
+	p->addModel(createModel<QuantizeWidget>("luckyxxl", "Quantize", "Quantize", QUANTIZER_TAG));
+	p->addModel(createModel<TickWidget>("luckyxxl", "Tick", "Tick", CLOCK_TAG));
 }

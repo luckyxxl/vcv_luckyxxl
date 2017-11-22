@@ -23,7 +23,7 @@ struct Tick : Module {
 	};
 
 	Tick() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {}
-	void step();
+	void step() override;
 
 	float clock_phase = 0.f;
 	uint32_t tick = UINT32_MAX;
@@ -41,7 +41,7 @@ void Tick::step() {
 	display[3] = (int)(bpm / .1f) % 10 + '0';
 	if(display[0] == '0') display[0] = '\0';
 
-	clock_phase += (bpm / 60.f) / gSampleRate * 12;
+	clock_phase += (bpm / 60.f) / engineGetSampleRate() * 12;
 
 	bool ticked = false;
 

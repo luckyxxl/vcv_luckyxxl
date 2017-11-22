@@ -23,27 +23,27 @@ struct Quantize : Module {
 	int display_semi;
 	std::array<char, 2> display;
 
-	Quantize() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) { initialize(); }
-	void initialize();
+	Quantize() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) { reset(); }
+	void reset() override;
 
-	void step();
+	void step() override;
 
 	void update_display();
 
-	json_t *toJson() {
+	json_t *toJson() override {
 		json_t *r = json_object();
 		json_object_set_new(r, "display_semi", json_integer(display_semi));
 		return r;
 	}
 
-	void fromJson(json_t *r) {
+	void fromJson(json_t *r) override {
 		json_t *d = json_object_get(r, "display_semi");
 		if(d) display_semi = json_integer_value(d);
 	}
 };
 
 
-void Quantize::initialize() {
+void Quantize::reset() {
 	display_semi = 0;
 	display.fill('\0');
 }
