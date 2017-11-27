@@ -16,9 +16,9 @@ struct Tick : Module {
 		OUT_1_2,
 		OUT_1_4,
 		OUT_1_8,
-		OUT_1_12,
+		OUT_1_4_3,
 		OUT_1_16,
-		OUT_1_24,
+		OUT_1_8_3,
 		NUM_OUTPUTS
 	};
 
@@ -52,21 +52,21 @@ void Tick::step() {
 	}
 
 	if(ticked) {
-		outputs[OUT_1_1].value  = tick % 48u ? 0.f : 5.f;
-		outputs[OUT_1_2].value  = tick % 24u ? 0.f : 5.f;
-		outputs[OUT_1_4].value  = tick % 12u ? 0.f : 5.f;
-		outputs[OUT_1_8].value  = tick % 6u ? 0.f : 5.f;
-		outputs[OUT_1_12].value = tick % 4u ? 0.f : 5.f;
-		outputs[OUT_1_16].value = tick % 3u ? 0.f : 5.f;
-		outputs[OUT_1_24].value = tick % 2u ? 0.f : 5.f;
+		outputs[OUT_1_1].value   = tick % 48u ? 0.f : 5.f;
+		outputs[OUT_1_2].value   = tick % 24u ? 0.f : 5.f;
+		outputs[OUT_1_4].value   = tick % 12u ? 0.f : 5.f;
+		outputs[OUT_1_8].value   = tick % 6u ? 0.f : 5.f;
+		outputs[OUT_1_4_3].value = tick % 4u ? 0.f : 5.f;
+		outputs[OUT_1_16].value  = tick % 3u ? 0.f : 5.f;
+		outputs[OUT_1_8_3].value = tick % 2u ? 0.f : 5.f;
 	} else {
-		outputs[OUT_1_1].value  = 0.f;
-		outputs[OUT_1_2].value  = 0.f;
-		outputs[OUT_1_4].value  = 0.f;
-		outputs[OUT_1_8].value  = 0.f;
-		outputs[OUT_1_12].value = 0.f;
-		outputs[OUT_1_16].value = 0.f;
-		outputs[OUT_1_24].value = 0.f;
+		outputs[OUT_1_1].value   = 0.f;
+		outputs[OUT_1_2].value   = 0.f;
+		outputs[OUT_1_4].value   = 0.f;
+		outputs[OUT_1_8].value   = 0.f;
+		outputs[OUT_1_4_3].value = 0.f;
+		outputs[OUT_1_16].value  = 0.f;
+		outputs[OUT_1_8_3].value = 0.f;
 	}
 }
 
@@ -95,11 +95,11 @@ TickWidget::TickWidget() {
 
 	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 80), module, Tick::BPM, 30.0, 240.0, 120.0));
 
-	addOutput(createOutput<PJ301MPort>(Vec(55, 145), module, Tick::OUT_1_1));
-	addOutput(createOutput<PJ301MPort>(Vec(55, 175), module, Tick::OUT_1_2));
-	addOutput(createOutput<PJ301MPort>(Vec(55, 205), module, Tick::OUT_1_4));
-	addOutput(createOutput<PJ301MPort>(Vec(55, 235), module, Tick::OUT_1_8));
-	addOutput(createOutput<PJ301MPort>(Vec(55, 265), module, Tick::OUT_1_12));
-	addOutput(createOutput<PJ301MPort>(Vec(55, 295), module, Tick::OUT_1_16));
-	addOutput(createOutput<PJ301MPort>(Vec(55, 325), module, Tick::OUT_1_24));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 145), module, Tick::OUT_1_1));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 175), module, Tick::OUT_1_2));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 205), module, Tick::OUT_1_4));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 235), module, Tick::OUT_1_8));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 265), module, Tick::OUT_1_4_3));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 295), module, Tick::OUT_1_16));
+	addOutput(createOutput<PJ301MPort>(Vec(47, 325), module, Tick::OUT_1_8_3));
 }
