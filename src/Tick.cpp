@@ -26,7 +26,7 @@ struct Tick : Module {
 	void step() override;
 
 	float clock_phase = 0.f;
-	uint32_t tick = UINT32_MAX;
+	uint32_t tick = 0u;
 
 	char display[4];
 };
@@ -35,35 +35,35 @@ struct Tick : Module {
 void Tick::step() {
 	const float bpm = params[BPM].value;
 
-	display[0] = (int)(bpm / 100.f) % 10 + '0';
-	display[1] = (int)(bpm / 10.f) % 10 + '0';
-	display[2] = (int)(bpm / 1.f) % 10 + '0';
-	display[3] = (int)(bpm / .1f) % 10 + '0';
+	display[0] = int(bpm / 100.f) % 10 + '0';
+	display[1] = int(bpm / 10.f) % 10 + '0';
+	display[2] = int(bpm / 1.f) % 10 + '0';
+	display[3] = int(bpm / .1f) % 10 + '0';
 	if(display[0] == '0') display[0] = '\0';
-
-	clock_phase += (bpm / 60.f) / engineGetSampleRate() * 12;
 
 	bool ticked = false;
 
+	clock_phase += (bpm / 60.f) / engineGetSampleRate() * 12.f;
+
 	if(clock_phase >= 1.f) {
 		ticked = true;
-		if(++tick >= 48u) tick = 0u;
+		tick = (tick+1u) % 48u;
 		clock_phase -= 1.f;
 	}
 
 	if(ticked) {
-		outputs[OUT_1_1].value = !(tick % 48u);
-		outputs[OUT_1_2].value = !(tick % 24u);
-		outputs[OUT_1_4].value = !(tick % 12u);
-		outputs[OUT_1_8].value = !(tick % 6u);
-		outputs[OUT_1_12].value = !(tick % 4u);
-		outputs[OUT_1_16].value = !(tick % 3u);
-		outputs[OUT_1_24].value = !(tick % 2u);
+		outputs[OUT_1_1].value  = tick % 48u ? 0.f : 5.f;
+		outputs[OUT_1_2].value  = tick % 24u ? 0.f : 5.f;
+		outputs[OUT_1_4].value  = tick % 12u ? 0.f : 5.f;
+		outputs[OUT_1_8].value  = tick % 6u ? 0.f : 5.f;
+		outputs[OUT_1_12].value = tick % 4u ? 0.f : 5.f;
+		outputs[OUT_1_16].value = tick % 3u ? 0.f : 5.f;
+		outputs[OUT_1_24].value = tick % 2u ? 0.f : 5.f;
 	} else {
-		outputs[OUT_1_1].value = 0.f;
-		outputs[OUT_1_2].value = 0.f;
-		outputs[OUT_1_4].value = 0.f;
-		outputs[OUT_1_8].value = 0.f;
+		outputs[OUT_1_1].value  = 0.f;
+		outputs[OUT_1_2].value  = 0.f;
+		outputs[OUT_1_4].value  = 0.f;
+		outputs[OUT_1_8].value  = 0.f;
 		outputs[OUT_1_12].value = 0.f;
 		outputs[OUT_1_16].value = 0.f;
 		outputs[OUT_1_24].value = 0.f;
