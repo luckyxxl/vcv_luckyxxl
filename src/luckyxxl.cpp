@@ -10,6 +10,7 @@ void init(rack::Plugin *p) {
 	p->version = TOSTRING(VERSION);
 #endif
 	p->website = "https://github.com/luckyxxl/vcv_luckyxxl";
+	p->manual = "https://github.com/luckyxxl/vcv_luckyxxl/blob/master/README.md";
 
 	p->addModel(createModel<DistributeWidget>("luckyxxl", "Distribute", "Distribute", MULTIPLE_TAG));
 	p->addModel(createModel<QuantizeWidget>("luckyxxl", "Quantize", "Quantize", QUANTIZER_TAG));
