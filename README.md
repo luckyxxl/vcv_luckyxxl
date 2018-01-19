@@ -1,15 +1,21 @@
 # luckyxxl
 
-My own modules for [VCVRack](https://github.com/VCVRack/Rack) [v0.5.0](https://github.com/VCVRack/Rack/releases/tag/v0.5.0).
+My own modules for [VCVRack](https://github.com/VCVRack/Rack) [v0.5.1](https://github.com/VCVRack/Rack/releases/tag/v0.5.1).
 
 Clone this repo into the `plugins` folder of Rack and name the new folder `luckyxxl`, i.e.:
 * `cd plugins && git clone https://github.com/luckyxxl/vcv_luckyxxl.git luckyxxl`
 
-### Distribute
+### Distribute4
 
-![Distribute_screenshot](https://raw.githubusercontent.com/luckyxxl/vcv_luckyxxl/master/screenshots/Distribute.png)
+![Distribute4_screenshot](https://raw.githubusercontent.com/luckyxxl/vcv_luckyxxl/master/screenshots/Distribute4.png)
 
 A 1-to-4 multiplexer with five individual instances.
+
+### Distribute2
+
+![Distribute2_screenshot](https://raw.githubusercontent.com/luckyxxl/vcv_luckyxxl/master/screenshots/Distribute2.png)
+
+A 1-to-2 multiplexer with ten individual instances.
 
 ### Quantize
 

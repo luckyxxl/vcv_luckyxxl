@@ -12,8 +12,12 @@ extern Plugin *plugin;
 // module widgets
 ////////////////////
 
-struct DistributeWidget : ModuleWidget {
-	DistributeWidget();
+struct Distribute2Widget : ModuleWidget {
+	Distribute2Widget();
+};
+
+struct Distribute4Widget : ModuleWidget {
+	Distribute4Widget();
 };
 
 struct QuantizeWidget : ModuleWidget {
