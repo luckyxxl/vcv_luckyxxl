@@ -33,16 +33,17 @@ struct Tick : Module {
 
 void Tick::step() {
 	const float bpm = params[BPM].value;
+	const float bpm_display = std::round(bpm * 10.f) / 10.f;
 
-	display[0] = int(bpm / 100.f) % 10 + '0';
-	display[1] = int(bpm / 10.f) % 10 + '0';
-	display[2] = int(bpm / 1.f) % 10 + '0';
-	display[3] = int(bpm / .1f) % 10 + '0';
+	display[0] = int(bpm_display / 100.f) % 10 + '0';
+	display[1] = int(bpm_display / 10.f) % 10 + '0';
+	display[2] = int(bpm_display / 1.f) % 10 + '0';
+	display[3] = int(bpm_display / .1f) % 10 + '0';
 	if(display[0] == '0') display[0] = '\0';
 
 	bool ticked = false;
 
-	clock_phase += (bpm / 60.f) / engineGetSampleRate() * 12.f;
+	clock_phase += (bpm / 60.f) * engineGetSampleTime() * 12.f;
 
 	if(clock_phase >= 1.f) {
 		ticked = true;
