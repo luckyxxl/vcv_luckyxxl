@@ -33,7 +33,6 @@ struct Quantize : Module {
 	std::array<char, 2> display;
 };
 
-
 void Quantize::step() {
 	const float in = inputs[IN].value;
 
@@ -83,28 +82,33 @@ void Quantize::update_display() {
 }
 
 
-QuantizeWidget::QuantizeWidget() {
-	Quantize *module = new Quantize();
-	setModule(module);
+struct QuantizeWidget : ModuleWidget {
+	QuantizeWidget(Quantize *module);
+};
+
+QuantizeWidget::QuantizeWidget(Quantize *module) : ModuleWidget(module) {
 	box.size = Vec(90, 380);
 
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Quantize.svg")));
+		panel->setBackground(SVG::load(assetPlugin(pluginLuckyxxl, "res/Quantize.svg")));
 		addChild(panel);
 	}
 
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-15, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-15, 0)));
+	addChild(Widget::create<ScrewSilver>(Vec(15, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addInput(createInput<PJ301MPort>(Vec(12, 320), module, Quantize::IN));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 320), module, Quantize::OUT));
+	addInput(Port::create<PJ301MPort>(Vec(12, 320), Port::INPUT, module, Quantize::IN));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 320), Port::OUTPUT, module, Quantize::OUT));
 
 	addChild(new SevenSegmentDisplay(Vec(20, 49), 8.f, &module->display[0]));
 	addChild(new SevenSegmentDisplay(Vec(52, 49), 8.f, &module->display[1]));
 
-	addParam(createParam<CKSS>(Vec(24, 100), module, Quantize::DISPLAY_MODE, 0, 1, 1));
-	addParam(createParam<CKSS>(Vec(60, 100), module, Quantize::HOLD, 0, 1, 0));
+	addParam(ParamWidget::create<CKSS>(Vec(24, 100), module, Quantize::DISPLAY_MODE, 0, 1, 1));
+	addParam(ParamWidget::create<CKSS>(Vec(60, 100), module, Quantize::HOLD, 0, 1, 0));
 }
+
+
+Model *modelQuantizeModule = Model::create<Quantize, QuantizeWidget>("luckyxxl", "Quantize", "Quantize", QUANTIZER_TAG);

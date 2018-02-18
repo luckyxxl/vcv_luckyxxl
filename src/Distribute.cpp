@@ -46,7 +46,6 @@ struct Distribute2 : Module {
 	void step() override;
 };
 
-
 void Distribute2::step() {
 	const float in1 = inputs[DIST1_IN].value;
 	const float in2 = inputs[DIST2_IN].value;
@@ -82,53 +81,58 @@ void Distribute2::step() {
 }
 
 
-Distribute2Widget::Distribute2Widget() {
-	Distribute2 *module = new Distribute2();
-	setModule(module);
+struct Distribute2Widget : ModuleWidget {
+	Distribute2Widget(Distribute2 *module);
+};
+
+Distribute2Widget::Distribute2Widget(Distribute2 *module) : ModuleWidget(module) {
 	box.size = Vec(105, 380);
 
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Distribute2.svg")));
+		panel->setBackground(SVG::load(assetPlugin(pluginLuckyxxl, "res/Distribute2.svg")));
 		addChild(panel);
 	}
 
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-15, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-15, 0)));
+	addChild(Widget::create<ScrewSilver>(Vec(15, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addInput(createInput<PJ301MPort>(Vec(15.5, 40), module, Distribute2::DIST1_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 65), module, Distribute2::DIST1_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 65), module, Distribute2::DIST1_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(65.5, 40), module, Distribute2::DIST2_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 65), module, Distribute2::DIST2_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 65), module, Distribute2::DIST2_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(15.5, 105), module, Distribute2::DIST3_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 130), module, Distribute2::DIST3_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 130), module, Distribute2::DIST3_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(65.5, 105), module, Distribute2::DIST4_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 130), module, Distribute2::DIST4_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 130), module, Distribute2::DIST4_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(15.5, 170), module, Distribute2::DIST5_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 195), module, Distribute2::DIST5_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 195), module, Distribute2::DIST5_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(65.5, 170), module, Distribute2::DIST6_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 195), module, Distribute2::DIST6_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 195), module, Distribute2::DIST6_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(15.5, 235), module, Distribute2::DIST7_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 260), module, Distribute2::DIST7_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 260), module, Distribute2::DIST7_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(65.5, 235), module, Distribute2::DIST8_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 260), module, Distribute2::DIST8_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 260), module, Distribute2::DIST8_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(15.5, 300), module, Distribute2::DIST9_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 325), module, Distribute2::DIST9_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 325), module, Distribute2::DIST9_OUT2));
-	addInput(createInput<PJ301MPort>(Vec(65.5, 300), module, Distribute2::DIST10_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 325), module, Distribute2::DIST10_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 325), module, Distribute2::DIST10_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(15.5, 40), Port::INPUT, module, Distribute2::DIST1_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 65), Port::OUTPUT, module, Distribute2::DIST1_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 65), Port::OUTPUT, module, Distribute2::DIST1_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(65.5, 40), Port::INPUT, module, Distribute2::DIST2_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 65), Port::OUTPUT, module, Distribute2::DIST2_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 65), Port::OUTPUT, module, Distribute2::DIST2_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(15.5, 105), Port::INPUT, module, Distribute2::DIST3_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 130), Port::OUTPUT, module, Distribute2::DIST3_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 130), Port::OUTPUT, module, Distribute2::DIST3_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(65.5, 105), Port::INPUT, module, Distribute2::DIST4_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 130), Port::OUTPUT, module, Distribute2::DIST4_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 130), Port::OUTPUT, module, Distribute2::DIST4_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(15.5, 170), Port::INPUT, module, Distribute2::DIST5_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 195), Port::OUTPUT, module, Distribute2::DIST5_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 195), Port::OUTPUT, module, Distribute2::DIST5_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(65.5, 170), Port::INPUT, module, Distribute2::DIST6_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 195), Port::OUTPUT, module, Distribute2::DIST6_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 195), Port::OUTPUT, module, Distribute2::DIST6_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(15.5, 235), Port::INPUT, module, Distribute2::DIST7_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 260), Port::OUTPUT, module, Distribute2::DIST7_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 260), Port::OUTPUT, module, Distribute2::DIST7_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(65.5, 235), Port::INPUT, module, Distribute2::DIST8_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 260), Port::OUTPUT, module, Distribute2::DIST8_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 260), Port::OUTPUT, module, Distribute2::DIST8_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(15.5, 300), Port::INPUT, module, Distribute2::DIST9_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 325), Port::OUTPUT, module, Distribute2::DIST9_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 325), Port::OUTPUT, module, Distribute2::DIST9_OUT2));
+	addInput(Port::create<PJ301MPort>(Vec(65.5, 300), Port::INPUT, module, Distribute2::DIST10_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 325), Port::OUTPUT, module, Distribute2::DIST10_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 325), Port::OUTPUT, module, Distribute2::DIST10_OUT2));
 }
+
+
+Model *modelDistribute2Module = Model::create<Distribute2, Distribute2Widget>("luckyxxl", "Distribute2", "Distribute2", MULTIPLE_TAG);
 
 
 struct Distribute4 : Module {
@@ -171,7 +175,6 @@ struct Distribute4 : Module {
 	void step() override;
 };
 
-
 void Distribute4::step() {
 	const float in1 = inputs[DIST1_IN].value;
 	const float in2 = inputs[DIST2_IN].value;
@@ -202,45 +205,50 @@ void Distribute4::step() {
 }
 
 
-Distribute4Widget::Distribute4Widget() {
-	Distribute4 *module = new Distribute4();
-	setModule(module);
+struct Distribute4Widget : ModuleWidget {
+	Distribute4Widget(Distribute4 *module);
+};
+
+Distribute4Widget::Distribute4Widget(Distribute4 *module) : ModuleWidget(module) {
 	box.size = Vec(105, 380);
 
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Distribute4.svg")));
+		panel->setBackground(SVG::load(assetPlugin(pluginLuckyxxl, "res/Distribute4.svg")));
 		addChild(panel);
 	}
 
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-15, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-15, 0)));
+	addChild(Widget::create<ScrewSilver>(Vec(15, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addInput(createInput<PJ301MPort>(Vec(40.5, 40), module, Distribute4::DIST1_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 65), module, Distribute4::DIST1_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 65), module, Distribute4::DIST1_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 65), module, Distribute4::DIST1_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 65), module, Distribute4::DIST1_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(40.5, 105), module, Distribute4::DIST2_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 130), module, Distribute4::DIST2_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 130), module, Distribute4::DIST2_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 130), module, Distribute4::DIST2_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 130), module, Distribute4::DIST2_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(40.5, 170), module, Distribute4::DIST3_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 195), module, Distribute4::DIST3_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 195), module, Distribute4::DIST3_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 195), module, Distribute4::DIST3_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 195), module, Distribute4::DIST3_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(40.5, 235), module, Distribute4::DIST4_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 260), module, Distribute4::DIST4_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 260), module, Distribute4::DIST4_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 260), module, Distribute4::DIST4_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 260), module, Distribute4::DIST4_OUT4));
-	addInput(createInput<PJ301MPort>(Vec(40.5, 300), module, Distribute4::DIST5_IN));
-	addOutput(createOutput<PJ301MPort>(Vec(3, 325), module, Distribute4::DIST5_OUT1));
-	addOutput(createOutput<PJ301MPort>(Vec(28, 325), module, Distribute4::DIST5_OUT2));
-	addOutput(createOutput<PJ301MPort>(Vec(53, 325), module, Distribute4::DIST5_OUT3));
-	addOutput(createOutput<PJ301MPort>(Vec(78, 325), module, Distribute4::DIST5_OUT4));
+	addInput(Port::create<PJ301MPort>(Vec(40.5, 40), Port::INPUT, module, Distribute4::DIST1_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 65), Port::OUTPUT, module, Distribute4::DIST1_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 65), Port::OUTPUT, module, Distribute4::DIST1_OUT2));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 65), Port::OUTPUT, module, Distribute4::DIST1_OUT3));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 65), Port::OUTPUT, module, Distribute4::DIST1_OUT4));
+	addInput(Port::create<PJ301MPort>(Vec(40.5, 105), Port::INPUT, module, Distribute4::DIST2_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 130), Port::OUTPUT, module, Distribute4::DIST2_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 130), Port::OUTPUT, module, Distribute4::DIST2_OUT2));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 130), Port::OUTPUT, module, Distribute4::DIST2_OUT3));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 130), Port::OUTPUT, module, Distribute4::DIST2_OUT4));
+	addInput(Port::create<PJ301MPort>(Vec(40.5, 170), Port::INPUT, module, Distribute4::DIST3_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 195), Port::OUTPUT, module, Distribute4::DIST3_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 195), Port::OUTPUT, module, Distribute4::DIST3_OUT2));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 195), Port::OUTPUT, module, Distribute4::DIST3_OUT3));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 195), Port::OUTPUT, module, Distribute4::DIST3_OUT4));
+	addInput(Port::create<PJ301MPort>(Vec(40.5, 235), Port::INPUT, module, Distribute4::DIST4_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 260), Port::OUTPUT, module, Distribute4::DIST4_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 260), Port::OUTPUT, module, Distribute4::DIST4_OUT2));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 260), Port::OUTPUT, module, Distribute4::DIST4_OUT3));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 260), Port::OUTPUT, module, Distribute4::DIST4_OUT4));
+	addInput(Port::create<PJ301MPort>(Vec(40.5, 300), Port::INPUT, module, Distribute4::DIST5_IN));
+	addOutput(Port::create<PJ301MPort>(Vec(3, 325), Port::OUTPUT, module, Distribute4::DIST5_OUT1));
+	addOutput(Port::create<PJ301MPort>(Vec(28, 325), Port::OUTPUT, module, Distribute4::DIST5_OUT2));
+	addOutput(Port::create<PJ301MPort>(Vec(53, 325), Port::OUTPUT, module, Distribute4::DIST5_OUT3));
+	addOutput(Port::create<PJ301MPort>(Vec(78, 325), Port::OUTPUT, module, Distribute4::DIST5_OUT4));
 }
+
+
+Model *modelDistribute4Module = Model::create<Distribute4, Distribute4Widget>("luckyxxl", "Distribute", "Distribute4", MULTIPLE_TAG);

@@ -31,7 +31,6 @@ struct Tick : Module {
 	char display[4];
 };
 
-
 void Tick::step() {
 	const float bpm = params[BPM].value;
 
@@ -71,21 +70,23 @@ void Tick::step() {
 }
 
 
-TickWidget::TickWidget() {
-	Tick *module = new Tick();
-	setModule(module);
+struct TickWidget : ModuleWidget {
+	TickWidget(Tick *module);
+};
+
+TickWidget::TickWidget(Tick *module) : ModuleWidget(module) {
 	box.size = Vec(90, 380);
 
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
-		panel->setBackground(SVG::load(assetPlugin(plugin, "res/Tick.svg")));
+		panel->setBackground(SVG::load(assetPlugin(pluginLuckyxxl, "res/Tick.svg")));
 		addChild(panel);
 	}
 
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
-	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
-	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 0)));
+	addChild(Widget::create<ScrewSilver>(Vec(15, 365)));
+	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 365)));
 
 	addChild(new SevenSegmentDisplay(Vec(14, 48), 5.f, &module->display[0]));
 	addChild(new SevenSegmentDisplay(Vec(31, 48), 5.f, &module->display[1]));
@@ -93,13 +94,16 @@ TickWidget::TickWidget() {
 	addChild(new SevenSegmentDisplay(Vec(65, 48), 5.f, &module->display[3]));
 	addChild(new SevenSegmentDot(Vec(61.5, 68), 5.f));
 
-	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 80), module, Tick::BPM, 30.0, 240.0, 120.0));
+	addParam(ParamWidget::create<Davies1900hBlackKnob>(Vec(27, 80), module, Tick::BPM, 30.0, 240.0, 120.0));
 
-	addOutput(createOutput<PJ301MPort>(Vec(47, 145), module, Tick::OUT_1_1));
-	addOutput(createOutput<PJ301MPort>(Vec(47, 175), module, Tick::OUT_1_2));
-	addOutput(createOutput<PJ301MPort>(Vec(47, 205), module, Tick::OUT_1_4));
-	addOutput(createOutput<PJ301MPort>(Vec(47, 235), module, Tick::OUT_1_8));
-	addOutput(createOutput<PJ301MPort>(Vec(47, 265), module, Tick::OUT_1_4_3));
-	addOutput(createOutput<PJ301MPort>(Vec(47, 295), module, Tick::OUT_1_16));
-	addOutput(createOutput<PJ301MPort>(Vec(47, 325), module, Tick::OUT_1_8_3));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 145), Port::OUTPUT, module, Tick::OUT_1_1));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 175), Port::OUTPUT, module, Tick::OUT_1_2));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 205), Port::OUTPUT, module, Tick::OUT_1_4));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 235), Port::OUTPUT, module, Tick::OUT_1_8));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 265), Port::OUTPUT, module, Tick::OUT_1_4_3));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 295), Port::OUTPUT, module, Tick::OUT_1_16));
+	addOutput(Port::create<PJ301MPort>(Vec(47, 325), Port::OUTPUT, module, Tick::OUT_1_8_3));
 }
+
+
+Model *modelTickModule = Model::create<Tick, TickWidget>("luckyxxl", "Tick", "Tick", CLOCK_TAG);

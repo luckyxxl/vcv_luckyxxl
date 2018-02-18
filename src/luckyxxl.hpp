@@ -1,29 +1,12 @@
 #include "rack.hpp"
 
-#include <cmath>
-
 
 using namespace rack;
 
 
-extern Plugin *plugin;
+extern Plugin *pluginLuckyxxl;
 
-////////////////////
-// module widgets
-////////////////////
-
-struct Distribute2Widget : ModuleWidget {
-	Distribute2Widget();
-};
-
-struct Distribute4Widget : ModuleWidget {
-	Distribute4Widget();
-};
-
-struct QuantizeWidget : ModuleWidget {
-	QuantizeWidget();
-};
-
-struct TickWidget : ModuleWidget {
-	TickWidget();
-};
+extern Model *modelDistribute2Module;
+extern Model *modelDistribute4Module;
+extern Model *modelQuantizeModule;
+extern Model *modelTickModule;
