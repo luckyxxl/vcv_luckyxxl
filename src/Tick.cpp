@@ -28,10 +28,28 @@ struct Tick : Module {
 	float clock_phase = 0.f;
 	uint32_t tick = 0u;
 
+	template<uint32_t div>
+	struct Output
+	{
+		void tick(uint32_t tick) { if(!(tick % div)) t = 0.f; }
+		float process(float dt) { return (t += dt) <= 15e-3f ? 5.f : 0.f; }
+
+		float t = std::numeric_limits<float>::max();
+	};
+
+	Output<48u> output_1_1;
+	Output<24u> output_1_2;
+	Output<12u> output_1_4;
+	Output<6u> output_1_8;
+	Output<4u> output_1_4_3;
+	Output<3u> output_1_16;
+	Output<2u> output_1_8_3;
+
 	char display[4];
 };
 
 void Tick::step() {
+	const float dt = engineGetSampleTime();
 	const float bpm = params[BPM].value;
 	const float bpm_display = std::round(bpm * 10.f) / 10.f;
 
@@ -41,33 +59,28 @@ void Tick::step() {
 	display[3] = int(bpm_display / .1f) % 10 + '0';
 	if(display[0] == '0') display[0] = '\0';
 
-	bool ticked = false;
-
-	clock_phase += (bpm / 60.f) * engineGetSampleTime() * 12.f;
+	clock_phase += (bpm / 60.f) * dt * 12.f;
 
 	if(clock_phase >= 1.f) {
-		ticked = true;
 		tick = (tick+1u) % 48u;
 		clock_phase -= 1.f;
+
+		output_1_1.tick(tick);
+		output_1_2.tick(tick);
+		output_1_4.tick(tick);
+		output_1_8.tick(tick);
+		output_1_4_3.tick(tick);
+		output_1_16.tick(tick);
+		output_1_8_3.tick(tick);
 	}
 
-	if(ticked) {
-		outputs[OUT_1_1].value   = tick % 48u ? 0.f : 5.f;
-		outputs[OUT_1_2].value   = tick % 24u ? 0.f : 5.f;
-		outputs[OUT_1_4].value   = tick % 12u ? 0.f : 5.f;
-		outputs[OUT_1_8].value   = tick % 6u ? 0.f : 5.f;
-		outputs[OUT_1_4_3].value = tick % 4u ? 0.f : 5.f;
-		outputs[OUT_1_16].value  = tick % 3u ? 0.f : 5.f;
-		outputs[OUT_1_8_3].value = tick % 2u ? 0.f : 5.f;
-	} else {
-		outputs[OUT_1_1].value   = 0.f;
-		outputs[OUT_1_2].value   = 0.f;
-		outputs[OUT_1_4].value   = 0.f;
-		outputs[OUT_1_8].value   = 0.f;
-		outputs[OUT_1_4_3].value = 0.f;
-		outputs[OUT_1_16].value  = 0.f;
-		outputs[OUT_1_8_3].value = 0.f;
-	}
+	outputs[OUT_1_1].value   = output_1_1.process(dt);
+	outputs[OUT_1_2].value   = output_1_2.process(dt);
+	outputs[OUT_1_4].value   = output_1_4.process(dt);
+	outputs[OUT_1_8].value   = output_1_8.process(dt);
+	outputs[OUT_1_4_3].value = output_1_4_3.process(dt);
+	outputs[OUT_1_16].value  = output_1_16.process(dt);
+	outputs[OUT_1_8_3].value = output_1_8_3.process(dt);
 }
 
 
