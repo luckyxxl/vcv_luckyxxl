@@ -22,7 +22,7 @@ struct Tick : Module {
 		NUM_OUTPUTS
 	};
 
-	Tick() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {}
+	Tick() { config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS); }
 	void step() override;
 
 	float clock_phase = 0.f;
@@ -88,7 +88,9 @@ struct TickWidget : ModuleWidget {
 	TickWidget(Tick *module);
 };
 
-TickWidget::TickWidget(Tick *module) : ModuleWidget(module) {
+TickWidget::TickWidget(Tick *module) {
+	setModule(module);
+
 	box.size = Vec(90, 380);
 
 	{
@@ -98,26 +100,28 @@ TickWidget::TickWidget(Tick *module) : ModuleWidget(module) {
 		addChild(panel);
 	}
 
-	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 0)));
-	addChild(Widget::create<ScrewSilver>(Vec(15, 365)));
-	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 365)));
+	addChild(createWidget<ScrewSilver>(Vec(box.size.x-30, 0)));
+	addChild(createWidget<ScrewSilver>(Vec(15, 365)));
+	addChild(createWidget<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addChild(new SevenSegmentDisplay(Vec(14, 48), 5.f, &module->display[0]));
-	addChild(new SevenSegmentDisplay(Vec(31, 48), 5.f, &module->display[1]));
-	addChild(new SevenSegmentDisplay(Vec(48, 48), 5.f, &module->display[2]));
-	addChild(new SevenSegmentDisplay(Vec(65, 48), 5.f, &module->display[3]));
-	addChild(new SevenSegmentDot(Vec(61.5, 68), 5.f));
+	if(module) {
+		addChild(new SevenSegmentDisplay(Vec(14, 48), 5.f, &module->display[0]));
+		addChild(new SevenSegmentDisplay(Vec(31, 48), 5.f, &module->display[1]));
+		addChild(new SevenSegmentDisplay(Vec(48, 48), 5.f, &module->display[2]));
+		addChild(new SevenSegmentDisplay(Vec(65, 48), 5.f, &module->display[3]));
+		addChild(new SevenSegmentDot(Vec(61.5, 68), 5.f));
+	}
 
-	addParam(ParamWidget::create<Davies1900hBlackKnob>(Vec(27, 80), module, Tick::BPM, 30.0, 240.0, 120.0));
+	addParam(createParam<Davies1900hBlackKnob>(Vec(27, 80), module, Tick::BPM, 30.0, 240.0, 120.0));
 
-	addOutput(Port::create<PJ301MPort>(Vec(47, 145), Port::OUTPUT, module, Tick::OUT_1_1));
-	addOutput(Port::create<PJ301MPort>(Vec(47, 175), Port::OUTPUT, module, Tick::OUT_1_2));
-	addOutput(Port::create<PJ301MPort>(Vec(47, 205), Port::OUTPUT, module, Tick::OUT_1_4));
-	addOutput(Port::create<PJ301MPort>(Vec(47, 235), Port::OUTPUT, module, Tick::OUT_1_8));
-	addOutput(Port::create<PJ301MPort>(Vec(47, 265), Port::OUTPUT, module, Tick::OUT_1_4_3));
-	addOutput(Port::create<PJ301MPort>(Vec(47, 295), Port::OUTPUT, module, Tick::OUT_1_16));
-	addOutput(Port::create<PJ301MPort>(Vec(47, 325), Port::OUTPUT, module, Tick::OUT_1_8_3));
+	addOutput(createPort<PJ301MPort>(Vec(47, 145), PortWidget::OUTPUT, module, Tick::OUT_1_1));
+	addOutput(createPort<PJ301MPort>(Vec(47, 175), PortWidget::OUTPUT, module, Tick::OUT_1_2));
+	addOutput(createPort<PJ301MPort>(Vec(47, 205), PortWidget::OUTPUT, module, Tick::OUT_1_4));
+	addOutput(createPort<PJ301MPort>(Vec(47, 235), PortWidget::OUTPUT, module, Tick::OUT_1_8));
+	addOutput(createPort<PJ301MPort>(Vec(47, 265), PortWidget::OUTPUT, module, Tick::OUT_1_4_3));
+	addOutput(createPort<PJ301MPort>(Vec(47, 295), PortWidget::OUTPUT, module, Tick::OUT_1_16));
+	addOutput(createPort<PJ301MPort>(Vec(47, 325), PortWidget::OUTPUT, module, Tick::OUT_1_8_3));
 }
 
 
-Model *modelTickModule = Model::create<Tick, TickWidget>("luckyxxl", "Tick", "Tick", CLOCK_TAG);
+Model *modelTickModule = createModel<Tick, TickWidget>("Tick");

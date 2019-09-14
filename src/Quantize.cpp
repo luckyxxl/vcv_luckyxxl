@@ -20,7 +20,8 @@ struct Quantize : Module {
 		NUM_OUTPUTS
 	};
 
-	Quantize() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {
+	Quantize() {
+		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS);
 		display_semi = 0;
 		display.fill('\0');
 	}
@@ -86,7 +87,9 @@ struct QuantizeWidget : ModuleWidget {
 	QuantizeWidget(Quantize *module);
 };
 
-QuantizeWidget::QuantizeWidget(Quantize *module) : ModuleWidget(module) {
+QuantizeWidget::QuantizeWidget(Quantize *module) {
+	setModule(module);
+
 	box.size = Vec(90, 380);
 
 	{
@@ -96,19 +99,21 @@ QuantizeWidget::QuantizeWidget(Quantize *module) : ModuleWidget(module) {
 		addChild(panel);
 	}
 
-	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-15, 0)));
-	addChild(Widget::create<ScrewSilver>(Vec(15, 365)));
-	addChild(Widget::create<ScrewSilver>(Vec(box.size.x-30, 365)));
+	addChild(createWidget<ScrewSilver>(Vec(box.size.x-15, 0)));
+	addChild(createWidget<ScrewSilver>(Vec(15, 365)));
+	addChild(createWidget<ScrewSilver>(Vec(box.size.x-30, 365)));
 
-	addInput(Port::create<PJ301MPort>(Vec(12, 320), Port::INPUT, module, Quantize::IN));
-	addOutput(Port::create<PJ301MPort>(Vec(53, 320), Port::OUTPUT, module, Quantize::OUT));
+	addInput(createPort<PJ301MPort>(Vec(12, 320), PortWidget::INPUT, module, Quantize::IN));
+	addOutput(createPort<PJ301MPort>(Vec(53, 320), PortWidget::OUTPUT, module, Quantize::OUT));
 
-	addChild(new SevenSegmentDisplay(Vec(20, 49), 8.f, &module->display[0]));
-	addChild(new SevenSegmentDisplay(Vec(52, 49), 8.f, &module->display[1]));
+	if(module) {
+		addChild(new SevenSegmentDisplay(Vec(20, 49), 8.f, &module->display[0]));
+		addChild(new SevenSegmentDisplay(Vec(52, 49), 8.f, &module->display[1]));
+	}
 
-	addParam(ParamWidget::create<CKSS>(Vec(24, 100), module, Quantize::DISPLAY_MODE, 0, 1, 1));
-	addParam(ParamWidget::create<CKSS>(Vec(60, 100), module, Quantize::HOLD, 0, 1, 0));
+	addParam(createParam<CKSS>(Vec(24, 100), module, Quantize::DISPLAY_MODE, 0, 1, 1));
+	addParam(createParam<CKSS>(Vec(60, 100), module, Quantize::HOLD, 0, 1, 0));
 }
 
 
-Model *modelQuantizeModule = Model::create<Quantize, QuantizeWidget>("luckyxxl", "Quantize", "Quantize", QUANTIZER_TAG);
+Model *modelQuantizeModule = createModel<Quantize, QuantizeWidget>("Quantize");

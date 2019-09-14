@@ -59,6 +59,8 @@ void SevenSegmentDisplay::draw(NVGcontext *vg) {
 	static const NVGcolor on_color = nvgRGB(0, 200, 0);
 
 	uint8_t bitmap = 0u;
+
+	if(display)
 	{
 		auto b = bitmaps.find(*display);
 		if(b != bitmaps.end()) bitmap = b->second;
